@@ -2,16 +2,97 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Fantasy City Map</title>
+    <title>City of Orbonne</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts for fantasy style -->
+    https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap
     <link rel="stylesheet" href="style.css" />
     https://unpkg.com/leaflet/dist/leaflet.css
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Cinzel Decorative', cursive;
+            background-color: #1e2a38;
+            color: #d0d8e0;
+        }
+        h1 {
+            text-align: center;
+            padding: 20px;
+            font-size: 2.5em;
+            color: #a0c4ff;
+            text-shadow: 2px 2px 4px #000;
+        }
+        #map {
+            height: 90vh;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-    <h1>Fantasy City Interactive Map</h1>
+    <h1>City of Orbonne</h1>
     <div id="map"></div>
     https://unpkg.com/leaflet/dist/leaflet.js
     <script src="script.js"></script>
+
+
+<!-- Legend container -->
+<div id="map-legend" class="legend">
+  <h4>Legend</h4>
+  <ul>
+    <li><span class="legend-icon tavern"></span> Tavern</li>
+    <li><span class="legend-icon guild"></span> Guild Hall</li>
+    <li><span class="legend-icon market"></span> Market</li>
+    <li><span class="legend-icon temple"></span> Temple</li>
+  </ul>
+</div>
+
+<style>
+  .legend {
+    position: absolute;
+    bottom: 30px;
+    right: 20px;
+    background: rgba(30, 42, 56, 0.9);
+    padding: 10px 15px;
+    border-radius: 8px;
+    color: #d0d8e0;
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 14px;
+    box-shadow: 0 0 10px #000;
+  }
+
+  .legend h4 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    color: #a0c4ff;
+    text-shadow: 1px 1px 2px #000;
+  }
+
+  .legend ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .legend li {
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+  }
+
+  .legend-icon {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 8px;
+    border-radius: 3px;
+  }
+
+  .legend-icon.tavern { background-color: #ffb347; }
+  .legend-icon.guild { background-color: #87cefa; }
+  .legend-icon.market { background-color: #90ee90; }
+  .legend-icon.temple { background-color: #dda0dd; }
+</style>
+
 </body>
 </html>

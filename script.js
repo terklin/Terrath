@@ -11,7 +11,8 @@ const imageHeight = 2048;
 const bounds = [[0, 0], [imageWidth, imageHeight]];
 
 // Add the image overlay
-L.imageOverlay('City_of_Orbonne.jpg', bounds).addTo(map);
+ 
+L.imageOverlay('https://terklin.github.io/Terrath/City_of_Orbonne.jpg', bounds).addTo(map);
 
 // Set the view to the center of the image
 map.fitBounds(bounds);

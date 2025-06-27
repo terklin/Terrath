@@ -1,33 +1,49 @@
-
 // Initialize the map
-var map = L.map('map').setView([0, 0], 2); // Default view
-
-// Add OpenStreetMap tile layer
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
-}).addTo(map);
-
-// Example points of interest
-var pointsOfInterest = [
-    { lat: 10, lng: 10, title: "Castle of Eldoria", description: "The ancient seat of power." },
-    { lat: 15, lng: 5, title: "Mystic Market", description: "A bustling market of magical goods." }
-];
-
-// Add markers to the map
-pointsOfInterest.forEach(function(poi) {
-    L.marker([poi.lat, poi.lng])
-        .addTo(map)
-        .bindPopup("<b>" + poi.title + "</b><br>" + poi.description);
+var map = L.map('map', {
+    crs: L.CRS.Simple,
+    minZoom: -2
 });
 
-// Allow user to add new pins
+// Dimensions of the fantasy city image
+var imageWidth = 2000;
+var imageHeight = 1500;
+var bounds = [[0,0], [imageHeight, imageWidth]];
+
+// Add the fantasy city image as an overlay
+var image = L.imageOverlay('City_of_Orbonne.jpg', bounds).addTo(map);
+map.fitBounds(bounds);
+
+// Function to create a popup form
+function createPopupForm(latlng) {
+    var container = L.DomUtil.create('div');
+    var inputTitle = L.DomUtil.create('input', '', container);
+    inputTitle.type = 'text';
+    inputTitle.placeholder = 'Title';
+
+    var inputDesc = L.DomUtil.create('textarea', '', container);
+    inputDesc.placeholder = 'Description';
+
+    var button = L.DomUtil.create('button', '', container);
+    button.innerHTML = 'Add Pin';
+
+    L.DomEvent.on(button, 'click', function() {
+        var title = inputTitle.value;
+        var desc = inputDesc.value;
+        if (title && desc) {
+            L.marker(latlng).addTo(map)
+                .bindPopup('<b>' + title + '</b><br>' + desc)
+                .openPopup();
+            map.closePopup();
+        }
+    });
+
+    return container;
+}
+
+// Add click event to add new pins
 map.on('click', function(e) {
-    var title = prompt("Enter the name of this location:");
-    var description = prompt("Enter a description:");
-    if (title && description) {
-        L.marker([e.latlng.lat, e.latlng.lng])
-            .addTo(map)
-            .bindPopup("<b>" + title + "</b><br>" + description)
-            .openPopup();
-    }
+    var popup = L.popup()
+        .setLatLng(e.latlng)
+        .setContent(createPopupForm(e.latlng))
+        .openOn(map);
 });

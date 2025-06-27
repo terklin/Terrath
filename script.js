@@ -6,8 +6,8 @@ const map = L.map('map', {
 });
 
 // Dimensions of the image
-const imageWidth = 4096;
-const imageHeight = 3072;
+const imageWidth = 3072;
+const imageHeight = 4096;
 const bounds = [[0, 0], [imageHeight, imageWidth]];
 
 // Add the image overlay

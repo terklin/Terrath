@@ -6,9 +6,9 @@ const map = L.map('map', {
 });
 
 // Dimensions of the image
-const imageWidth = 3072;
-const imageHeight = 4096;
-const bounds = [[0, 0], [imageHeight, imageWidth]];
+const imageWidth = 1536;
+const imageHeight = 2048;
+const bounds = [[0, 0], [imageWidth, imageHeight]];
 
 // Add the image overlay
 L.imageOverlay('City_of_Orbonne.jpg', bounds).addTo(map);
